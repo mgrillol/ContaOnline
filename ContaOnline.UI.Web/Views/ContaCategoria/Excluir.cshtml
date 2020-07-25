@@ -1,0 +1,26 @@
+﻿@model ContaOnline.Domain.Models.ContaCategoria
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h3>Excluir Categoria de Conta</h3>
+
+<h4>Você tem certeza que deseja excluir isso?</h4>
+<div>
+    <hr />
+    <p>
+        <label class="control-label">Descrição</label>
+        <span>@Model.Nome</span>
+    </p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-danger" />
+            <a href='@Url.Action("Inicio")' class="btn btn-default"> Voltar </a>
+        </div>
+    }
+</div>
