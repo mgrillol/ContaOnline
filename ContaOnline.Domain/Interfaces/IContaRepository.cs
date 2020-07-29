@@ -9,6 +9,8 @@ namespace ContaOnline.Domain.Interfaces
 {
     public interface IContaRepository:IRepository<Conta>
     {
-        IEnumerable<Conta> ObterPorFiltro(ContaFiltro filtro);
+        IEnumerable<ContaListItem> ObterPorUsuario(string usuarioid);
+
+        IEnumerable<ContaListItem> ObterPorFiltro(ContaFiltro filtro);
     }
 }

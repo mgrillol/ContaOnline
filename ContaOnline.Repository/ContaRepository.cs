@@ -25,14 +25,14 @@ namespace ContaOnline.Repository
             Db.Execute("ContaIncluir", conta);
         }
 
-        public IEnumerable<Conta> ObterPorFiltro(ContaFiltro filtro)
-        {
-            throw new NotImplementedException();
-        }
-
         public Conta ObterPorId(string id)
         {
             return Db.QueryEntidade<Conta>("ContaObterPorId", new { Id = id});
+        }
+
+        public IEnumerable<ContaListItem> ObterPorUsuario(string usuarioid)
+        {
+            return Db.QueryColecao<ContaListItem>("ContaObterTodos", new { UsuarioId = usuarioid});
         }
 
         public IEnumerable<Conta> ObterTodos(string usuarioId)
@@ -41,6 +41,11 @@ namespace ContaOnline.Repository
         }
 
         public IEnumerable<string> Validar()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<ContaListItem> IContaRepository.ObterPorFiltro(ContaFiltro filtro)
         {
             throw new NotImplementedException();
         }

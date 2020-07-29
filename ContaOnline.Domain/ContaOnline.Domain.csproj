@@ -52,6 +52,8 @@
     <Compile Include="Models\PessoaFisicaJuridica.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ContaListItem.cs" />
+    <Compile Include="ViewModels\ContaViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Code\AppHelper.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\ContaController.cs" />
     <Compile Include="Controllers\ContaCorrenteController.cs" />
     <Compile Include="Controllers\ContaCategoriaController.cs" />
     <Compile Include="Controllers\ContatoController.cs" />
@@ -182,6 +183,8 @@
     <Content Include="Views\Contato\Inicio.cshtml" />
     <Content Include="Views\Contato\Alterar.cshtml" />
     <Content Include="Views\Contato\Excluir.cshtml" />
+    <Content Include="Views\Conta\Inicio.cshtml" />
+    <Content Include="Views\Conta\Incluir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

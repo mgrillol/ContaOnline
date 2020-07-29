@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ContaOnline.Domain.Models.ContaListItem>
+
+@{
+    ViewBag.Title = "Inicio";
+}
+
+<h2>Conta</h2>
+
+<p>
+    <a href='@Url.Action("Incluir")'><span class="glyphicon glyphicon-plus-sign">Novo</span></a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contato)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.data.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contato)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria)
+        </td>
+        <td>
+            @item.Valor.ToString("c")
+        </td>
+        <td>
+            <a href='@Url.Action("Alterar", new { id = item.Id })'><span class="glyphicon glyphicon-edit"></span></a>
+            <a href='@Url.Action("Excluir", new { id = item.Id })'><span class="glyphicon glyphicon-remove"></span></a>
+        </td>
+    </tr>
+}
+
+</table>
