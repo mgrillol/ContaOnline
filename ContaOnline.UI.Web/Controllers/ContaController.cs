@@ -21,17 +21,77 @@ namespace ContaOnline.UI.Web.Controllers
             usuario = AppHelper.ObterUsuarioLogado();
         }
 
+        public ActionResult Alterar(string Id)
+        {
+            if (usuario == null) return RedirectToAction("Login", "App");
+            var viewModel = new ContaViewModel();
+
+            viewModel.ContaInstancia = repositorio.ObterPorId(Id);
+
+            PreencherViewModel(viewModel);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Alterar(ContaViewModel viewModel)
+        {
+            if (usuario == null) return RedirectToAction("Login", "App");
+            try
+            {
+                viewModel.ContaInstancia.UsuarioId = usuario.Id;
+                repositorio.Alterar(viewModel.ContaInstancia);
+                return RedirectToAction("Inicio");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+
+            PreencherViewModel(viewModel);
+            return View(viewModel);
+        }
+
         public ActionResult Incluir()
         {
             if (usuario == null) return RedirectToAction("Login", "App");
             var viewModel = new ContaViewModel();
 
+            PreencherViewModel(viewModel);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Incluir(ContaViewModel viewModel)
+        {
+            if (usuario == null) return RedirectToAction("Login", "App");
+            try
+            {
+                viewModel.ContaInstancia.UsuarioId = usuario.Id;
+                viewModel.ContaInstancia.Id = Guid.NewGuid().ToString();
+                repositorio.Incluir(viewModel.ContaInstancia);
+                return RedirectToAction("Inicio");
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+
+            PreencherViewModel(viewModel);
+            return View(viewModel);
+        }
+
+        private void PreencherViewModel(ContaViewModel viewModel)
+        {
             var contaCorrenteRepositorio = AppHelper.ObterContaCorrenteRepository();
             viewModel.ContaCorrenteList = contaCorrenteRepositorio.ObterTodos(usuario.Id).ToList();
 
+            var contaCategoriaRepositorio = AppHelper.ObterContaCategoriaRepository();
+            viewModel.ContaCategoriaList = contaCategoriaRepositorio.ObterTodos(usuario.Id).ToList();
 
-
-            return View(viewModel);
+            var contatoRepositorio = AppHelper.ObterContatoRepository();
+            viewModel.ContatoList = contatoRepositorio.ObterTodos(usuario.Id).ToList();
         }
 
         public ActionResult Inicio()

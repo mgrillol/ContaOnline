@@ -20,6 +20,7 @@ namespace ContaOnline.Domain.ViewModels
             this.ContaCorrenteList = new List<ContaCorrente>();
             this.ContatoList = new List<Contato>();
             this.ContaInstancia = new Conta();
+            this.ContaInstancia.Tipo = PagarReceber.Pagar;
         }
     }
 }

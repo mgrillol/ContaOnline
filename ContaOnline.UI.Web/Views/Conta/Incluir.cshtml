@@ -1,4 +1,5 @@
 ﻿@model ContaOnline.Domain.ViewModels.ContaViewModel
+@using ContaOnline.Domain.Models
 
 @{
     ViewBag.Title = "Incluir";
@@ -21,13 +22,90 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ContaInstancia.ContaCorrenteId, "Conta corrente", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.ContaInstancia.ContaCorrenteId, new SelectList(Model.ContaCorrenteList, "Id", "Descricao", Model.ContaInstancia.ContaCorrenteId), new { @class = "form-control"})
+            @Html.DropDownListFor(model => model.ContaInstancia.ContaCorrenteId, new SelectList(Model.ContaCorrenteList, "Id", "Descricao", Model.ContaInstancia.ContaCorrenteId), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <!--Tipo-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.Tipo, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="ContaInstancia_Tipo" name="ContaInstancia.Tipo" class="form-control">
+                <option value="1" @if (Model.ContaInstancia.Tipo == PagarReceber.Pagar) { Html.Raw("selected"); }>Pagar</option>
+                <option valus="2" @if (Model.ContaInstancia.Tipo == PagarReceber.receber) { Html.Raw("selected"); }>Receber</option>
+            </select>
+        </div>
+    </div>
+
+    <!--Categoria-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.CategoriaId, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ContaInstancia.CategoriaId, new SelectList(Model.ContaCategoriaList, "Id", "Nome", Model.ContaInstancia.CategoriaId), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <!--Contato-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.ContatoId, "Contato", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ContaInstancia.ContatoId, new SelectList(Model.ContatoList, "Id", "Nome", Model.ContaInstancia.ContatoId), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <!--Vencimento-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.Vencimento, "Vencimento", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContaInstancia.Vencimento, new { HtmlAttributes = new { @class = "form-control", @Value = Model.ContaInstancia.Vencimento.ToString("d") } })
+        </div>
+    </div>
+
+    <!--Valor-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.Valor, "Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContaInstancia.Valor, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <hr />
+
+    <!--DataPagamento-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.DataPagamento, "Data de Pagamento", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContaInstancia.DataPagamento, new { HtmlAttributes = new { @class = "form-control", @Value = Model.ContaInstancia.Vencimento.ToString("d") } })
+        </div>
+    </div>
+
+    <!--Aacrescimo-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.Acrescimo, "Acrescimo", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContaInstancia.Acrescimo, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <!--Desconto-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.Desconto, "Desconto", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContaInstancia.Desconto, new { HtmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <!--Valor Pago-->
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContaInstancia.ValorPago, "Valor pago", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContaInstancia.ValorPago, new { HtmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Incluir" class="btn btn-default" />
         </div>
     </div>
 </div>
