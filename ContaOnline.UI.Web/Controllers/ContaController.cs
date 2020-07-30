@@ -4,6 +4,7 @@ using ContaOnline.Domain.ViewModels;
 using ContaOnline.Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,6 +20,20 @@ namespace ContaOnline.UI.Web.Controllers
         {
             repositorio = AppHelper.ObterContaRepository();
             usuario = AppHelper.ObterUsuarioLogado();
+        }
+
+        public ActionResult Excluir(string Id)
+        {
+            if (usuario == null) return RedirectToAction("Login", "App");
+            var conta = repositorio.ObterExibirPorId(Id);
+            return View(conta);
+        }
+
+        [HttpPost]
+        public ActionResult Excluir(String Id, ContaViewModel viewModel)
+        {
+            repositorio.Excluir(Id);
+            return RedirectToAction("Inicio");
         }
 
         public ActionResult Alterar(string Id)

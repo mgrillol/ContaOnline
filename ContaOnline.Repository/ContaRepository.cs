@@ -25,6 +25,11 @@ namespace ContaOnline.Repository
             Db.Execute("ContaIncluir", conta);
         }
 
+        public ContaExibirViewModel ObterExibirPorId(string id)
+        {
+            return Db.QueryEntidade<ContaExibirViewModel>("ContaObterExbirPorId", new { ContaId = id });
+        }
+
         public Conta ObterPorId(string id)
         {
             return Db.QueryEntidade<Conta>("ContaObterPorId", new { Id = id});

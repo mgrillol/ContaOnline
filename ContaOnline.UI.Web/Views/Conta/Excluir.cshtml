@@ -1,0 +1,106 @@
+﻿@model ContaOnline.Domain.Models.ContaExibirViewModel
+
+@{
+    ViewBag.Title = "Excluir";
+}
+
+<h2>Excluir</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ContaExibirViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vencimento)
+        </dt>
+
+        <dd>
+            @Model.Vencimento.ToString("d")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+
+        @if (Model.DataPagamento != null)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.DataPagamento)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DataPagamento)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Desconto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Desconto)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Acrescimo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Acrescimo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ValorPago)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ValorPago)
+            </dd>
+        }
+        <dt>
+            Descrição
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContaCorrenteDescricao)
+        </dd>
+
+        <dt>
+            Categoria
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaNome)
+        </dd>
+
+        <dt>
+            Contato
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContatoNome)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+            @Html.ActionLink("Retorinar", "Inicio")
+        </div>
+    }
+</div>
