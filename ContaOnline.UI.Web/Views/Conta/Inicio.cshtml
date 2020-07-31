@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ContaOnline.Domain.Models.ContaListItem>
+﻿@model ContaOnline.Domain.Models.ContaListViewModel
 
 @{
     ViewBag.Title = "Inicio";
@@ -9,48 +9,70 @@
 <p>
     <a href='@Url.Action("Incluir")'><span class="glyphicon glyphicon-plus-sign">Novo</span></a>
 </p>
+
+<hr/>
+
+<form method="post" class="form-inline">
+    <label>Data Inicial: </label>
+    @Html.EditorFor(m => m.Filtro.DataInicial, new { htmlAttributes = new { @class = "form-control", @value = @Model.Filtro.DataInicial.ToString("d"), style = "width:100px" } })
+
+    <label>Data Final: </label>
+    @Html.EditorFor(m => m.Filtro.DataFinal, new { htmlAttributes = new { @class = "form-control", @value = @Model.Filtro.DataFinal.ToString("d"), style = "width:100px" } })
+
+    <label>Conta: </label>
+    @Html.DropDownListFor(m => m.Filtro.ContaCorrenteId, new SelectList(Model.ContaCorrenteList, "Id", "Descricao", Model.Filtro.ContaCorrenteId), new { @class = "form-control", style = "width:150px" })
+
+    <label>Categoria: </label>
+    @Html.DropDownListFor(m => m.Filtro.CategoriaId, new SelectList(Model.CategoriaList, "Id", "Nome", Model.Filtro.CategoriaId), new { @class = "form-control", style = "width:150px" })
+
+    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-filter"></span>Filtrar</button>
+</form>
+
+<br/>
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.data)
+            Data
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descricao)
+            Descrição
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Contato)
+            Contato
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Categoria)
+            Categoria
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Valor)
+            Valor
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @item.data.ToShortDateString()
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contato)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Categoria)
-        </td>
-        <td>
-            @item.Valor.ToString("c")
-        </td>
-        <td>
-            <a href='@Url.Action("Alterar", new { id = item.Id })'><span class="glyphicon glyphicon-edit"></span></a>
-            <a href='@Url.Action("Excluir", new { id = item.Id })'><span class="glyphicon glyphicon-remove"></span></a>
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.ContaList)
+    {
+        <tr>
+            <td>
+                @item.data.ToShortDateString()
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @item.Valor.ToString("c")
+            </td>
+            <td>
+                <a href='@Url.Action("Alterar", new { id = item.Id })'><span class="glyphicon glyphicon-edit"></span></a>
+                <a href='@Url.Action("Excluir", new { id = item.Id })'><span class="glyphicon glyphicon-remove"></span></a>
+            </td>
+        </tr>
+    }
 
 </table>

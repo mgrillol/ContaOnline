@@ -113,8 +113,37 @@ namespace ContaOnline.UI.Web.Controllers
         {
             if (usuario == null) return RedirectToAction("Login", "App");
 
-            var lista = repositorio.ObterPorUsuario(usuario.Id);
-            return View(lista);
+            var viewModel = new ContaListViewModel();
+            viewModel.ContaList = repositorio.ObterPorUsuario(usuario.Id).ToList();
+            viewModel.Filtro.DataInicial = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            viewModel.Filtro.DataFinal = DateTime.Now;
+
+            PreencherContaListViewModel(viewModel);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Inicio(ContaListViewModel viewModel)
+        {
+            if (usuario == null) return RedirectToAction("Login", "App");
+
+            viewModel.Filtro.UsuarioId = usuario.Id;
+            viewModel.ContaList = repositorio.ObterPorFiltro(viewModel.Filtro).ToList();
+            PreencherContaListViewModel(viewModel);
+
+            return View(viewModel);
+        }
+
+        private void PreencherContaListViewModel(ContaListViewModel viewModel)
+        {
+            var catRep = AppHelper.ObterContaCategoriaRepository();
+            viewModel.CategoriaList = catRep.ObterTodos(usuario.Id).ToList();
+            viewModel.CategoriaList.Insert(0, new ContaCategoria() { Id = null, Nome = string.Empty });
+
+            var contaCorrenteRep = AppHelper.ObterContaCorrenteRepository();
+            viewModel.ContaCorrenteList = contaCorrenteRep.ObterTodos(usuario.Id).ToList();
+            viewModel.ContaCorrenteList.Insert(0, new ContaCorrente() { UsuarioId = null, Descricao = string.Empty });
         }
     }
 }

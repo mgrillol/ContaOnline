@@ -55,9 +55,9 @@
 
         <!--Vencimento-->
         <div class="form-group">
-            @Html.LabelFor(model => model.ContaInstancia.Vencimento, "Vencimento", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ContaInstancia.DataVencimento, "Vencimento", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ContaInstancia.Vencimento, new { HtmlAttributes = new { @class = "form-control", @Value = Model.ContaInstancia.Vencimento.ToString("d") } })
+                @Html.EditorFor(model => model.ContaInstancia.DataVencimento, new { HtmlAttributes = new { @class = "form-control", @Value = Model.ContaInstancia.DataVencimento.ToString("d") } })
             </div>
         </div>
 
@@ -75,7 +75,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ContaInstancia.DataPagamento, "Data de Pagamento", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ContaInstancia.DataPagamento, new { HtmlAttributes = new { @class = "form-control", @Value = Model.ContaInstancia.Vencimento.ToString("d") } })
+                @Html.EditorFor(model => model.ContaInstancia.DataPagamento, new { HtmlAttributes = new { @class = "form-control", @Value = Model.ContaInstancia.DataVencimento.ToString("d") } })
             </div>
         </div>
 

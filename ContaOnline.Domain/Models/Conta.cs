@@ -15,7 +15,7 @@ namespace ContaOnline.Domain.Models
         public string CategoriaId { get; set; }
         public string ContatoId { get; set; }
         public string Descricao { get; set; }
-        public DateTime Vencimento { get; set; }
+        public DateTime DataVencimento { get; set; }
         public decimal Valor { get; set; }
 
         public DateTime? DataPagamento { get; set; }

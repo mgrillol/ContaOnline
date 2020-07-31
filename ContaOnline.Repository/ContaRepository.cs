@@ -52,7 +52,31 @@ namespace ContaOnline.Repository
 
         IEnumerable<ContaListItem> IContaRepository.ObterPorFiltro(ContaFiltro filtro)
         {
-            throw new NotImplementedException();
+            if (filtro.DataInicial == null) filtro.DataInicial = DateTime.MinValue;
+            if (filtro.DataFinal == null) filtro.DataFinal = DateTime.MaxValue;
+
+            var lista = Db.QueryColecao<ContaListItem>("ContaObterEntreDatas",
+                new
+                {
+                    DataInicial = filtro.DataInicial,
+                    DataFinal = filtro.DataFinal,
+                    UsuarioId = filtro.UsuarioId
+                }
+            ).ToList();
+
+            var listaFiltrada = lista.ToList();
+
+            if (filtro.ContaCorrenteId != null)
+            {
+                listaFiltrada = listaFiltrada.ToList().Where(m => m.ContaCorrenteId == filtro.ContaCorrenteId).ToList();
+            }
+
+            if (filtro.CategoriaId != null)
+            {
+                listaFiltrada = listaFiltrada.ToList().Where(m => m.CategoriaId == filtro.CategoriaId).ToList();
+            }
+
+            return listaFiltrada;
         }
     }
 }
