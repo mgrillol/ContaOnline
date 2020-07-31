@@ -52,8 +52,7 @@ namespace ContaOnline.Repository
 
         IEnumerable<ContaListItem> IContaRepository.ObterPorFiltro(ContaFiltro filtro)
         {
-            if (filtro.DataInicial == null) filtro.DataInicial = DateTime.MinValue;
-            if (filtro.DataFinal == null) filtro.DataFinal = DateTime.MaxValue;
+            if (filtro.DataFinal == DateTime.MinValue) filtro.DataFinal = new DateTime(2090,12,31);
 
             var lista = Db.QueryColecao<ContaListItem>("ContaObterEntreDatas",
                 new
