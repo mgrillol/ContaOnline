@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContaOnline.UI.Web", "Conta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContaOnline.Tests", "ContaOnline.Tests\ContaOnline.Tests.csproj", "{C8181EDD-7AF1-40E9-A14A-7A59D797E5D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExemploWinClient", "WindowsExemploClient\ExemploWinClient.csproj", "{FD5582FF-ABC2-4CEE-94B2-50E74F091F1A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C8181EDD-7AF1-40E9-A14A-7A59D797E5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8181EDD-7AF1-40E9-A14A-7A59D797E5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8181EDD-7AF1-40E9-A14A-7A59D797E5D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD5582FF-ABC2-4CEE-94B2-50E74F091F1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD5582FF-ABC2-4CEE-94B2-50E74F091F1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD5582FF-ABC2-4CEE-94B2-50E74F091F1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD5582FF-ABC2-4CEE-94B2-50E74F091F1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

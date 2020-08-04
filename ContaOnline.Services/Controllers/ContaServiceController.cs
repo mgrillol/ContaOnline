@@ -19,8 +19,8 @@ namespace ContaOnline.Services.Controllers
             var repositorio = new ContaRepository();
             ContaListViewModel viewModel = new ContaListViewModel();
 
-            viewModel.Filtro.UsuarioId = "123Teste";
-            viewModel.Filtro.DataInicial = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            viewModel.Filtro.UsuarioId = "admin";
+            viewModel.Filtro.DataInicial = new DateTime(DateTime.Now.Year, 6, 1);
             viewModel.Filtro.DataFinal = DateTime.Now;
 
             viewModel.ContaList = repositorio.ObterPorFiltro(viewModel.Filtro).ToList();
