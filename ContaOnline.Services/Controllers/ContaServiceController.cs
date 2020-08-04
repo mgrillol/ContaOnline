@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ContaOnline.Domain.Interfaces;
+using ContaOnline.Domain.Models;
+using ContaOnline.Domain.ViewModels;
+using ContaOnline.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,11 +13,20 @@ namespace ContaOnline.Services.Controllers
 {
     public class ContaServiceController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        private IContaRepository repositorio;
 
+        // GET api/<controller>
+        public List<ContaListItem> Get()
+        {
+            ContaListViewModel viewModel = new ContaListViewModel();
+
+            viewModel.Filtro.UsuarioId = "123Teste";
+            viewModel.Filtro.DataInicial = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            viewModel.Filtro.DataFinal = DateTime.Now;
+
+            viewModel.ContaList = repositorio.ObterPorFiltro(viewModel.Filtro).ToList();
+
+            return viewModel.ContaList;
+        }
     }
 }

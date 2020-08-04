@@ -104,6 +104,16 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ContaOnline.Domain\ContaOnline.Domain.csproj">
+      <Project>{f6c85a69-16a5-4bed-936f-19354eafd805}</Project>
+      <Name>ContaOnline.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ContaOnline.Repository\ContaOnline.Repository.csproj">
+      <Project>{00f4c6a4-efac-4e24-867f-30a065e3b02d}</Project>
+      <Name>ContaOnline.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
