@@ -30,29 +30,9 @@ namespace ContaOnline.Repository
             return Db.QueryEntidade<ContaExibirViewModel>("ContaObterExbirPorId", new { ContaId = id });
         }
 
-        public Conta ObterPorId(string id)
+        public IEnumerable<ContaListItem> ObterPorFiltro(ContaFiltro filtro)
         {
-            return Db.QueryEntidade<Conta>("ContaObterPorId", new { Id = id});
-        }
-
-        public IEnumerable<ContaListItem> ObterPorUsuario(string usuarioid)
-        {
-            return Db.QueryColecao<ContaListItem>("ContaObterTodos", new { UsuarioId = usuarioid});
-        }
-
-        public IEnumerable<Conta> ObterTodos(string usuarioId)
-        {
-            return Db.QueryColecao<Conta>("ObterTodos", new { UsuarioId = usuarioId});
-        }
-
-        public IEnumerable<string> Validar()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<ContaListItem> IContaRepository.ObterPorFiltro(ContaFiltro filtro)
-        {
-            if (filtro.DataFinal == DateTime.MinValue) filtro.DataFinal = new DateTime(2090,12,31);
+            if (filtro.DataFinal == DateTime.MinValue) filtro.DataFinal = new DateTime(2090, 12, 31);
 
             var lista = Db.QueryColecao<ContaListItem>("ContaObterEntreDatas",
                 new
@@ -76,6 +56,26 @@ namespace ContaOnline.Repository
             }
 
             return listaFiltrada;
+        }
+
+        public Conta ObterPorId(string id)
+        {
+            return Db.QueryEntidade<Conta>("ContaObterPorId", new { Id = id});
+        }
+
+        public IEnumerable<ContaListItem> ObterPorUsuario(string usuarioid)
+        {
+            return Db.QueryColecao<ContaListItem>("ContaObterTodos", new { UsuarioId = usuarioid});
+        }
+
+        public IEnumerable<Conta> ObterTodos(string usuarioId)
+        {
+            return Db.QueryColecao<Conta>("ObterTodos", new { UsuarioId = usuarioId});
+        }
+
+        public IEnumerable<string> Validar()
+        {
+            throw new NotImplementedException();
         }
     }
 }

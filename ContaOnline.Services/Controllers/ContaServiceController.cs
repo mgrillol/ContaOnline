@@ -13,11 +13,10 @@ namespace ContaOnline.Services.Controllers
 {
     public class ContaServiceController : ApiController
     {
-        private IContaRepository repositorio;
-
         // GET api/<controller>
         public List<ContaListItem> Get()
         {
+            var repositorio = new ContaRepository();
             ContaListViewModel viewModel = new ContaListViewModel();
 
             viewModel.Filtro.UsuarioId = "123Teste";
