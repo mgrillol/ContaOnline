@@ -24,6 +24,11 @@
                     <li>@Html.ActionLink("Início", "Inicio", "App")</li>
                     <li>@Html.ActionLink("Registro", "Registro", "App")</li>
                     <li>@Html.ActionLink("Sobre", "Sobre", "App")</li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Sair", "LogOff", "App")</li>
+                    }
                 </ul>
             </div>
         </div>

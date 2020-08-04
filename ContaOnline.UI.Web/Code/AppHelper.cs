@@ -3,6 +3,7 @@ using ContaOnline.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 
 namespace ContaOnline.UI.Web
@@ -12,6 +13,13 @@ namespace ContaOnline.UI.Web
         public static ContaRepository ObterContaRepository()
         {
             return new ContaRepository();
+        }
+
+        public static void LogOff()
+        {
+            var contexto = HttpContext.Current.Request.GetOwinContext();
+            var autenticador = contexto.Authentication;
+            autenticador.SignOut();
         }
 
         public static ContatoRepository ObterContatoRepository()
@@ -31,12 +39,34 @@ namespace ContaOnline.UI.Web
 
         public static Usuario ObterUsuarioLogado()
         {
-            return (Usuario)HttpContext.Current.Session["usuario"];
+            var contexto = HttpContext.Current.Request.GetOwinContext();
+            var autenticador = contexto.Authentication;
+            var usuarioCookie = autenticador.User;
+            var usuario = new Usuario()
+            {
+                Id = usuarioCookie.Claims.First(m => m.Type == "UsuarioId").Value,
+                Nome = usuarioCookie.Identity.Name
+            };
+
+            return usuario;
+            
+            //return (Usuario)HttpContext.Current.Session["usuario"];
         }
 
         public static void RegistrarUsuario(Usuario usuario)
         {
-            HttpContext.Current.Session["usuario"] = usuario;
+            var identidade = new ClaimsIdentity("autenticacaoPorCookies");
+            var claimNome = new Claim(ClaimTypes.Name, usuario.Nome);
+            var claimId = new Claim("UsuarioId", usuario.Id);
+
+            identidade.AddClaim(claimNome);
+            identidade.AddClaim(claimId);
+
+            var contexto = HttpContext.Current.Request.GetOwinContext();
+            var autenticador = contexto.Authentication;
+            autenticador.SignIn(identidade);
+            
+            //HttpContext.Current.Session["usuario"] = usuario;
         }
 
         public static UsuarioRepository ObterUsuarioRepository()

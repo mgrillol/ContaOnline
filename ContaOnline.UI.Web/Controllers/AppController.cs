@@ -11,6 +11,12 @@ namespace ContaOnline.UI.Web.Controllers
 {
     public class AppController : Controller
     {
+        public ActionResult LogOff()
+        {
+            AppHelper.LogOff();
+            return View();
+        }
+
         public ActionResult Registro()
         {
             var registro = new RegistroViewModel();
@@ -60,13 +66,14 @@ namespace ContaOnline.UI.Web.Controllers
             return View(registroViewModel);
         }
 
-
+        [AllowAnonymous]
         public ActionResult Login()
         {var loginViewModel = new LoginViewModel();
 
             return View(loginViewModel);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(LoginViewModel loginViewModel)
         {
@@ -88,13 +95,14 @@ namespace ContaOnline.UI.Web.Controllers
         /// Tela Inicial
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         public ActionResult Inicio()
         {
-            var usuario = AppHelper.ObterUsuarioLogado();
-            if (usuario == null)
-            {
-                return RedirectToAction("Login");
-            }
+            //var usuario = AppHelper.ObterUsuarioLogado();
+            //if (usuario == null)
+            //{
+            //    return RedirectToAction("Login");
+            //}
 
             return View();
         }
